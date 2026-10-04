@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/furkanulusoy/agentguardai-pro/actions/workflows/tests.yml"><img alt="CI" src="https://github.com/furkanulusoy/agentguardai-pro/actions/workflows/tests.yml/badge.svg" /></a>
-  <a href="LICENSE"><img alt="License: AGPL-3.0-or-later" src="https://img.shields.io/badge/license-AGPL--3.0--or--later-2563eb" /></a>
+  <a href="LICENSE"><img alt="AGPL-3.0 license" src="https://img.shields.io/badge/license-AGPL--3.0-2563eb" /></a>
   <img alt="Python 3.10–3.12" src="https://img.shields.io/badge/python-3.10%E2%80%933.12-3776AB?logo=python&logoColor=white" />
   <img alt="Self-hosted" src="https://img.shields.io/badge/deployment-self--hosted-06b6d4" />
 </p>
@@ -171,4 +171,4 @@ OIDC/SAML SSO, SCIM, KMS/Vault-backed key management, WORM audit export, retenti
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing a security boundary. Release history is in [CHANGELOG.md](CHANGELOG.md).
 
-AgentGuard AI Pro is licensed under [AGPL-3.0-or-later](LICENSE).
+Copyright © 2026 Furkan ULUSOY. AgentGuard AI Pro is licensed under GNU Affero General Public License v3.0 or later. Read the [AGPL-3.0 license](LICENSE).

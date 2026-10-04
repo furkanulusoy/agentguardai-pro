@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/furkanulusoy/agentguardai-pro/actions/workflows/tests.yml"><img alt="CI" src="https://github.com/furkanulusoy/agentguardai-pro/actions/workflows/tests.yml/badge.svg" /></a>
-  <a href="LICENSE"><img alt="Lisans: AGPL-3.0-or-later" src="https://img.shields.io/badge/lisans-AGPL--3.0--or--later-2563eb" /></a>
+  <a href="LICENSE"><img alt="AGPL-3.0 lisansı" src="https://img.shields.io/badge/lisans-AGPL--3.0-2563eb" /></a>
   <img alt="Python 3.10–3.12" src="https://img.shields.io/badge/python-3.10%E2%80%933.12-3776AB?logo=python&logoColor=white" />
   <img alt="Self-hosted" src="https://img.shields.io/badge/kurulum-self--hosted-06b6d4" />
 </p>
@@ -107,7 +107,7 @@ Projede bulunan runner, Ollama üzerinden yerel Qwen3 modeli kullanabilir. Model
 
 ```powershell
 ollama pull qwen3:8b
-$env:AGENTGUARD_AGENT_KEY = "BURAYA_AGENTGUARD_AGENT_ANAHTARINI_YAPISTIRIN"
+$env:AGENTGUARD_AGENT_KEY = "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE"
 python sdk/python/examples/nemotron_agent.py --provider ollama "GitHub repolarımı listele. Hiçbir şeyi değiştirme."
 ```
 
@@ -171,4 +171,4 @@ OIDC/SAML SSO, SCIM, KMS/Vault tabanlı key management, WORM audit export, reten
 
 Bir güvenlik sınırını değiştirmeden önce [CONTRIBUTING.md](CONTRIBUTING.md) belgesini okuyun. Sürüm geçmişi [CHANGELOG.md](CHANGELOG.md) dosyasındadır.
 
-AgentGuard AI Pro, [AGPL-3.0-or-later](LICENSE) ile lisanslanır.
+Telif hakkı © 2026 Furkan ULUSOY. AgentGuard AI Pro, GNU Affero General Public License v3.0 veya sonrası ile lisanslanır. [AGPL-3.0 lisansını](LICENSE) okuyun.

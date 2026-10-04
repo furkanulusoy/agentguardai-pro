@@ -27,7 +27,7 @@ Gerekirse `VITE_API_BASE_URL` ile API adresini süreç ortamında verin. Anahtar
 koda veya Git deposuna yazmayın. Örnek AgentGuard anahtarı açıklaması:
 
 ```text
-BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN
+PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE
 ```
 
 ## Doğrulama

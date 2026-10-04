@@ -33,8 +33,8 @@ class TestSecretScanner(unittest.TestCase):
 
     def test_allows_documentation_placeholders(self) -> None:
         (self.root / "README.md").write_text(
-            "BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN\n"
-            "BURAYA KULLANDIĞINIZ YAPAY ZEKA APİSİ\n",
+            "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE\n"
+            "PASTE_YOUR_NVIDIA_API_KEY_HERE\n",
             encoding="utf-8",
         )
 

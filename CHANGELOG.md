@@ -2465,7 +2465,7 @@ wrong) in all three `LICENSE` copies (`/`, `agentguard/`, `sdk/python/`
 -- `sdk/typescript` has no separate copy, only a `package.json`
 `license` field). Copyright and `authors`/`author` fields across
 `pyproject.toml` (root and `sdk/python`), `sdk/typescript/package.json`,
-and `README.md` now attribute the project to Furkan Ulusoy rather than
+and `README.md` now attribute the project to Furkan ULUSOY rather than
 the placeholder "AgentGuard contributors". `YOUR_ORG` placeholder URLs
 in both `pyproject.toml` files corrected to the real
 `github.com/furkanulusoy/agentguard`, matching the CI badge URL that

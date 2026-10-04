@@ -9,7 +9,7 @@ description = "Thin async client for the AgentGuard platform API -- authenticate
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "Furkan Ulusoy" }]
+authors = [{ name = "Furkan ULUSOY" }]
 keywords = ["agent", "security", "guardrail", "ai-safety", "sdk"]
 classifiers = [
     "Development Status :: 3 - Alpha",

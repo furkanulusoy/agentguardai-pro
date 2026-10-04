@@ -52,7 +52,7 @@ asyncio.run(main())
 Anahtarı kaynak koda yazmayın. Yalnız çalıştırdığınız PowerShell oturumunda ayarlayın:
 
 ```powershell
-$env:AGENTGUARD_AGENT_KEY = "BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN"
+$env:AGENTGUARD_AGENT_KEY = "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE"
 ```
 
 `run()` blocks (polling) until a human resolves the request if the
@@ -64,7 +64,7 @@ and why. A full, runnable example: [`examples/basic_agent_loop.py`](examples/bas
 
 ```bash
 pip install -e ".[langgraph]"   # only needed for this example
-AGENTGUARD_AGENT_KEY="BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN" python examples/langgraph_agent.py
+AGENTGUARD_AGENT_KEY="PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE" python examples/langgraph_agent.py
 ```
 
 A real, runnable [`examples/langgraph_agent.py`](examples/langgraph_agent.py)
@@ -80,7 +80,7 @@ this package won't choose on your behalf).
 python -m venv .venv-crewai        # a DEDICATED venv -- see why below
 .venv-crewai/Scripts/pip install -e .
 .venv-crewai/Scripts/pip install crewai
-AGENTGUARD_AGENT_KEY="BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN" .venv-crewai/Scripts/python examples/crewai_agent.py
+AGENTGUARD_AGENT_KEY="PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE" .venv-crewai/Scripts/python examples/crewai_agent.py
 ```
 
 A real, runnable [`examples/crewai_agent.py`](examples/crewai_agent.py)

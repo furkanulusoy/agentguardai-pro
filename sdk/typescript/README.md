@@ -56,7 +56,7 @@ try {
 Anahtarı kaynak koda yazmayın. Yalnız çalıştırdığınız PowerShell oturumunda ayarlayın:
 
 ```powershell
-$env:AGENTGUARD_AGENT_KEY = "BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN"
+$env:AGENTGUARD_AGENT_KEY = "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE"
 ```
 
 `run()` awaits (polling) until a human resolves the request if the
@@ -68,7 +68,7 @@ full, runnable example: [`examples/basic-agent-loop.ts`](examples/basic-agent-lo
 
 ```bash
 npm install    # @langchain/core, zod, and tsx are already devDependencies
-AGENTGUARD_AGENT_KEY="BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN" npx tsx examples/langchain-agent.ts
+AGENTGUARD_AGENT_KEY="PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE" npx tsx examples/langchain-agent.ts
 ```
 
 A real, runnable [`examples/langchain-agent.ts`](examples/langchain-agent.ts)
@@ -82,7 +82,7 @@ this package won't make on your behalf).
 
 ```bash
 npm install    # @langchain/langgraph is already a devDependency
-AGENTGUARD_AGENT_KEY="BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN" npx tsx examples/langgraph-agent.ts
+AGENTGUARD_AGENT_KEY="PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE" npx tsx examples/langgraph-agent.ts
 ```
 
 A real, runnable [`examples/langgraph-agent.ts`](examples/langgraph-agent.ts)

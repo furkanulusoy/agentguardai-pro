@@ -32,8 +32,8 @@ Set credentials only in the current process environment. Do not commit them or
 place them in a repository file:
 
 ```powershell
-$env:NVIDIA_API_KEY = "BURAYA KULLANDIĞINIZ YAPAY ZEKA APİSİ"
-$env:AGENTGUARD_AGENT_KEY = "BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN"
+$env:NVIDIA_API_KEY = "PASTE_YOUR_NVIDIA_API_KEY_HERE"
+$env:AGENTGUARD_AGENT_KEY = "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE"
 python sdk/python/examples/nemotron_agent.py "List my GitHub repositories"
 ```
 
@@ -76,7 +76,7 @@ the connector credentials remain stored and used by AgentGuard, never by
 Ollama or the model process.
 
 ```powershell
-$env:AGENTGUARD_AGENT_KEY = "BURAYA AGENTGUARD AGENT ANAHTARINI KOPYALAYIN"
+$env:AGENTGUARD_AGENT_KEY = "PASTE_YOUR_AGENTGUARD_AGENT_KEY_HERE"
 python sdk/python/examples/nemotron_agent.py --provider ollama "GitHub repolarımı listele. Hiçbir şeyi değiştirme."
 ```
 
