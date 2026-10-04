@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentguard"
+version = "0.4.0"
+description = "Self-hosted security and governance for AI agent actions, approvals, connector scopes, and audit trails."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Furkan Ulusoy" }]
+keywords = ["agent", "security", "mcp", "guardrail", "ai-safety"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+yaml = ["pyyaml>=6.0"]
+cli = ["click>=8.0"]
+server = ["flask>=3.0"]
+# apps/api (FastAPI) -- the new SaaS platform layer, see
+# docs/ROADMAP_TO_PRODUCTION.md. Deliberately separate from `server`
+# (the Flask reference implementation, unaffected by this).
+api = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.30",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg>=0.29",
+    "pydantic-settings>=2.2",
+    "alembic>=1.13",
+    "psycopg[binary]>=3.1",   # sync driver, Alembic migrations only -- app uses asyncpg
+    "argon2-cffi>=23.1",
+    "pyjwt>=2.8",
+    "email-validator>=2.1",   # pydantic's EmailStr needs this installed explicitly
+    "cryptography>=42.0",     # Fernet -- connector credential encryption at rest
+    "google-auth>=2.28",
+    "google-auth-oauthlib>=1.2",
+    "google-api-python-client>=2.120",
+    "PyGithub>=2.3",           # GitHub connector (connectors/github)
+    "slack-sdk>=3.27",         # Slack connector (connectors/slack)
+    "httpx>=0.27",             # GitHub's/Slack's own OAuth token exchange (no google-auth-oauthlib equivalent)
+    "slowapi>=0.1.9",          # per-IP rate limiting on /auth/* (apps/api/rate_limit.py)
+]
+# apps/mcp_server -- a real MCP server fronting apps/api over HTTP, so
+# an actual MCP-speaking AI agent client (Claude Desktop, Claude Code,
+# ...) can drive AgentGuard for real. Separate extra from `api` since
+# a platform deployment doesn't need an MCP server running in the same
+# process, and vice versa.
+mcp_server = ["mcp>=1.0", "httpx>=0.27"]
+dev = ["ruff>=0.6", "mypy>=1.10"]
+all = ["agentguard[yaml,cli,server,api,mcp_server]"]
+
+[project.scripts]
+agentguard = "agentguard.cli:main"
+agentguard-mcp-server = "apps.mcp_server.server:main"
+
+[project.urls]
+Homepage = "https://github.com/furkanulusoy/agentguardai-pro"
+Documentation = "https://github.com/furkanulusoy/agentguardai-pro/blob/main/docs/LOCAL_PRODUCT.md"
+"Security policy" = "https://github.com/furkanulusoy/agentguardai-pro/security/policy"
+
+[tool.setuptools.packages.find]
+include = ["agentguard*"]
+
+[tool.ruff]
+line-length = 100
+# Alembic generates these; they're a frozen historical record (edited
+# once, right after generation, then never restyled) and Alembic's own
+# template doesn't match this project's style rules (Union[] vs X|Y,
+# import order) -- linting them on every run would just add churn.
+extend-exclude = ["alembic/versions"]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+disallow_untyped_defs = false
+plugins = ["pydantic.mypy"]

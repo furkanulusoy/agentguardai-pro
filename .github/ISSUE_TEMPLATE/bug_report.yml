@@ -1,0 +1,45 @@
+name: Hata bildirimi
+description: Yeniden üretilebilir bir ürün hatasını bildirin.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Secret, token, cookie, kişisel veri veya gerçek provider payload'ı eklemeyin. Güvenlik açığı için Security Policy akışını kullanın."
+  - type: input
+    id: version
+    attributes:
+      label: Sürüm veya commit
+      placeholder: 0.4.0 veya commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Ne oldu ve ne olmasını bekliyordunuz?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Yeniden üretim
+      description: Minimum, secretsiz adımları yazın.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ortam
+      description: İşletim sistemi, Docker ve browser sürümleri.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Veri güvenliği
+      options:
+        - label: Bu rapor secret, token, cookie veya kişisel veri içermiyor.
+          required: true
+        - label: Bu davranışın güvenlik açığı olmadığını değerlendirdim.
+          required: true

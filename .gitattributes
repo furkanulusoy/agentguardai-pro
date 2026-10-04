@@ -1,0 +1,14 @@
+# Shell scripts must stay LF even on a Windows checkout/CRLF-configured
+# git client -- a CRLF-broken shebang line inside a Linux container
+# (apps/api/docker-entrypoint.sh) fails with "bad interpreter", found
+# while building this project's Docker image on Windows.
+* text=auto
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

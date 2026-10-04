@@ -1,0 +1,5 @@
+import type { ReactNode } from 'react'
+import { ShieldCheck, Fingerprint, LockKeyhole } from 'lucide-react'
+export function AuthShell({children}:{children:ReactNode}){
+return <div className="auth-shell"><aside className="auth-story"><div className="product-brand"><span className="brand-symbol"><ShieldCheck size={22}/></span><span>AgentGuard<span className="brand-dot">.</span></span></div><div className="auth-story-body"><div className="eyebrow">AI ACTIONS. HUMAN TRUST.</div><h2>Ajanlarınız<br/>harekete geçsin.<br/><em>Kontrol sizde<br/>kalsın.</em></h2><p>Her eylem için açık yetkiler, insan onayı ve izlenebilir bir karar kaydı. AI ajanları için güvenli bir çalışma alanı.</p><div className="auth-signals"><span><Fingerprint size={15}/> Açık kapsam</span><span><ShieldCheck size={15}/> İnsan onayı</span><span><LockKeyhole size={15}/> Self-hosted</span></div></div><footer>AGENT GOVERNANCE PLATFORM · 2026</footer></aside><main className="auth-content">{children}</main></div>
+}

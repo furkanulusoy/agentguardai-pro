@@ -1,0 +1,136 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container: python:${{ matrix.python-version }}-slim
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: agentguard
+          POSTGRES_PASSWORD: agentguard_ci_password
+          POSTGRES_DB: agentguard
+        options: >-
+          --health-cmd "pg_isready -U agentguard -d agentguard"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      # Ephemeral CI-only values; never deploy these.
+      DATABASE_URL: postgresql://agentguard:agentguard_ci_password@postgres:5432/agentguard
+      JWT_SECRET_KEY: ci-test-secret-key-not-for-production-use
+      SECRET_ENCRYPTION_KEY: VCcQpvexfo1NHaCYmzlP0mYvfV8m4bdOK4nQEW5VPHM=
+      RATE_LIMIT_ENABLED: "false"
+      DEPLOYMENT_MODE: local
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -e ".[all]" -e sdk/python
+      - name: Full suite against isolated PostgreSQL database (skips fail)
+        run: python -B scripts/check-security.py --all
+      - name: MCP startup contract
+        run: python -c "from apps.mcp_server.server import mcp; assert mcp"
+      - name: Core example scenarios
+        run: python -m demo.run_all
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[all]" ruff mypy
+      - run: ruff check agentguard apps infrastructure connectors sdk/python tests scripts
+      - run: mypy agentguard infrastructure apps
+      - run: mypy agentguard_sdk examples
+        working-directory: sdk/python
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Reject committed secrets
+        run: python scripts/check-secrets.py
+      - run: pip install --upgrade pip setuptools
+      - run: pip install -e ".[all]" pip-audit
+      - run: pip-audit
+
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+        working-directory: apps/web
+      - run: npm run lint
+        working-directory: apps/web
+      - run: npm test
+        working-directory: apps/web
+      - run: npm run build
+        working-directory: apps/web
+      - run: npm audit --omit=dev
+        working-directory: apps/web
+
+  sdk-typescript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: sdk/typescript
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck:examples
+      - run: npx oxlint src tests examples
+      - run: npm test
+
+  docker-self-host:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate isolated local configuration without dotenv
+        run: |
+          python3 scripts/prepare-local.py
+          echo "AGENTGUARD_CONTAINER_USER=$(id -u):$(id -g)" >> "$GITHUB_ENV"
+      - name: Build and wait for real API and PostgreSQL
+        run: docker compose up -d --build --wait --wait-timeout 180
+      - name: Check served dashboard and database health through the public proxy
+        run: |
+          curl -fsS http://localhost:5000/ | grep -qi "<title>"
+          curl -fsS http://localhost:5000/api/health | grep -q '"database":"connected"'
+          curl -fsS http://localhost:5000/api/openapi.json > /dev/null
+          docker compose ps --services --status running | grep -qx worker
+          test "$(docker compose images -q api)" = "$(docker compose images -q worker)"
+      - name: Restart and confirm persistent database
+        run: |
+          docker compose restart api web
+          docker compose up -d --wait --wait-timeout 180
+          curl -fsS http://localhost:5000/api/health | grep -q '"database":"connected"'
+      - name: Safe service status on failure
+        if: failure()
+        run: docker compose ps -a
+      - name: Stop ephemeral CI stack
+        if: always()
+        run: docker compose down

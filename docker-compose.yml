@@ -1,0 +1,5 @@
+# Canonical self-host development profile. The implementation stays in one file
+# so `docker compose up` and scripts/start-local.ps1 cannot drift apart.
+name: agentguard-product
+include:
+  - path: docker-compose.local.yml

@@ -1,0 +1,11 @@
+# Example policy for an inbox connector, equivalent to Scenario D's
+# in-code policy. task_scope is everything the current task is allowed
+# to call; sensitive_actions is the subset that also needs a human's
+# explicit yes before it runs.
+connector_name: inbox
+task_scope:
+  - list_messages
+  - read_message
+  - send_message
+sensitive_actions:
+  - send_message

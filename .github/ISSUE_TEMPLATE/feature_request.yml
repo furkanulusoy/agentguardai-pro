@@ -1,0 +1,38 @@
+name: Özellik isteği
+description: Agent governance kullanım senaryosu veya ürün geliştirmesi önerin.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Kullanım senaryosu
+      description: Hangi agent, kullanıcı ve connector akışında hangi problem yaşanıyor?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Beklenen sonuç
+      description: Kullanıcı hangi sonucu güvenli biçimde elde etmeli?
+    validations:
+      required: true
+  - type: dropdown
+    id: boundary
+    attributes:
+      label: Etkilenen güven sınırı
+      options:
+        - Policy ve authorization
+        - Approval lifecycle
+        - Connector ve scope
+        - Audit ve observability
+        - Dashboard ve kullanıcı deneyimi
+        - SDK veya MCP
+        - Deployment
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Kabul koşulları
+      description: Denetlenebilir ve test edilebilir koşulları yazın.

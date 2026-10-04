@@ -1,0 +1,24 @@
+# apps/api/Dockerfile's build context is the whole repo (it needs
+# infrastructure/, connectors/, agentguard/ as siblings) -- without
+# this file, that context included this repo's own 1.1GB .venv/ and
+# .git/ history, found by watching `docker compose build` transfer
+# far more than the handful of source directories the Dockerfile
+# actually COPYs.
+.venv/
+sdk/python/.venv-crewai/
+.git/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+apps/web/dist/
+apps/web/node_modules/
+sdk/typescript/node_modules/
+sdk/typescript/dist/
+.env
+.claude/
+
+.local/
+.env*

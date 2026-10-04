@@ -1,0 +1,55 @@
+{
+  "name": "@agentguard/sdk",
+  "version": "0.1.0",
+  "description": "Thin client for the AgentGuard platform API -- authenticate as an Agent, call run() to execute a guarded connector action from your own agent framework code.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "license": "AGPL-3.0-or-later",
+  "author": "Furkan Ulusoy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furkanulusoy/agentguardai-pro.git",
+    "directory": "sdk/typescript"
+  },
+  "homepage": "https://github.com/furkanulusoy/agentguardai-pro/tree/main/sdk/typescript",
+  "bugs": {
+    "url": "https://github.com/furkanulusoy/agentguardai-pro/issues"
+  },
+  "keywords": [
+    "agent",
+    "security",
+    "guardrail",
+    "ai-safety",
+    "sdk"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck:examples": "tsc --noEmit -p tsconfig.examples.json",
+    "test": "vitest run",
+    "lint": "oxlint"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@langchain/core": "^1.2.0",
+    "@langchain/langgraph": "^1.4.12",
+    "@types/node": "^24.13.3",
+    "oxlint": "^1.75.0",
+    "tsx": "^4.23.12",
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.11",
+    "zod": "^3.25.76"
+  }
+}

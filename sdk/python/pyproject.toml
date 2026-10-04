@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentguard-sdk"
+version = "0.1.0"
+description = "Thin async client for the AgentGuard platform API -- authenticate as an Agent, call run() to execute a guarded connector action from your own agent framework code."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Furkan Ulusoy" }]
+keywords = ["agent", "security", "guardrail", "ai-safety", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = ["httpx>=0.27"]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.6", "mypy>=1.10"]
+# Only needed to run examples/langgraph_agent.py -- the core package
+# above stays dependency-free beyond httpx; this extra exists purely so
+# that example's own imports are documented somewhere, not because
+# agentguard_sdk itself needs LangChain/LangGraph for anything.
+langgraph = ["langgraph>=0.2", "langchain-core>=0.3"]
+
+[project.urls]
+Homepage = "https://github.com/furkanulusoy/agentguardai-pro"
+Documentation = "https://github.com/furkanulusoy/agentguardai-pro/tree/main/sdk/python"
+
+[tool.setuptools.packages.find]
+include = ["agentguard_sdk*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+disallow_untyped_defs = false

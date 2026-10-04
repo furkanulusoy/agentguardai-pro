@@ -1,0 +1,11 @@
+# apps/web/Dockerfile's build context is this directory alone.
+# node_modules/ is reinstalled fresh inside the container (npm ci) --
+# shipping the host's own copy in the build context is pure waste,
+# found the same way as the root .dockerignore: watching `docker
+# compose build web` transfer over 150MB of context for a package
+# whose real source is a few MB.
+node_modules/
+dist/
+.env
+
+.env*

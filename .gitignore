@@ -1,0 +1,35 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+# sdk/python/examples/crewai_agent.py's own isolated venv -- CrewAI's
+# dependency tree isn't meant to share a Python environment with this
+# repo's own .venv/ (see that example's module docstring for why).
+sdk/python/.venv-crewai/
+build/
+dist/
+*.egg-info/
+.env
+server_audit.jsonl
+server_quarantine.sqlite3
+*.log
+*.tsbuildinfo
+
+# IDE / tool caches -- local state, not project source
+.idea/
+.vscode/
+.mypy_cache/
+.ruff_cache/
+
+# Claude Code's own installed skill tooling -- not AgentGuard source,
+# was breaking CI lint (ruff was checking third-party design-skill
+# scripts that were never meant to be part of this repo).
+.claude/
+
+.local/
+.env*
+.DS_Store
+Thumbs.db
